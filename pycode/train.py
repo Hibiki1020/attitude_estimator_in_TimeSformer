@@ -186,6 +186,8 @@ class Trainer:
                     with torch.set_grad_enabled(phase=="train"):
                         roll_inf, pitch_inf = self.net(img_list)
 
+                        #print(roll_inf, pitch_inf)
+
                         logged_roll_inf = nn_functional.log_softmax(roll_inf, dim=1)
                         logged_pitch_inf = nn_functional.log_softmax(pitch_inf, dim=1)
 

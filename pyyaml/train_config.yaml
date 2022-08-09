@@ -6,22 +6,22 @@ pretrained_weights_file_name: "TimeSformer_divST_8x32_224_K600.pyth"
 
 train:
   - "/home/strage/flight_airsim_image/train_sequence1/degree_0"
-#   - "/home/strage/flight_airsim_image/train_sequence1/degree_5"
-#   - "/home/strage/flight_airsim_image/train_sequence1/degree_10"
-#   - "/home/strage/flight_airsim_image/train_sequence2/degree_0"
-#   - "/home/strage/flight_airsim_image/train_sequence2/degree_5"
-#   - "/home/strage/flight_airsim_image/train_sequence2/degree_10"
-#   - "/home/strage/flight_airsim_image/train_sequence3/degree_0"
-#   - "/home/strage/flight_airsim_image/train_sequence3/degree_5"
-#   - "/home/strage/flight_airsim_image/train_sequence3/degree_10"
-#   - "/home/strage/flight_airsim_image/train_sequence4/degree_0"
-#   - "/home/strage/flight_airsim_image/train_sequence4/degree_5"
-#   - "/home/strage/flight_airsim_image/train_sequence4/degree_10"
-#   - "/home/strage/flight_airsim_image/sequence9"
-#   - "/home/strage/flight_airsim_image/sequence10"
+  - "/home/strage/flight_airsim_image/train_sequence1/degree_5"
+  - "/home/strage/flight_airsim_image/train_sequence1/degree_10"
+  - "/home/strage/flight_airsim_image/train_sequence2/degree_0"
+  - "/home/strage/flight_airsim_image/train_sequence2/degree_5"
+  - "/home/strage/flight_airsim_image/train_sequence2/degree_10"
+  - "/home/strage/flight_airsim_image/train_sequence3/degree_0"
+  - "/home/strage/flight_airsim_image/train_sequence3/degree_5"
+  - "/home/strage/flight_airsim_image/train_sequence3/degree_10"
+  - "/home/strage/flight_airsim_image/sequence9"
+  - "/home/strage/flight_airsim_image/sequence10"
 
 valid:
   - "/home/strage/flight_airsim_image/sequence7"
+  - "/home/strage/flight_airsim_image/train_sequence4/degree_0"
+  - "/home/strage/flight_airsim_image/train_sequence4/degree_5"
+  - "/home/strage/flight_airsim_image/train_sequence4/degree_10"
 
 csv_name: "data_list.csv"
 
@@ -43,8 +43,8 @@ hyperparameters:
   num_epochs: 3
   optimizer_name: "RAdam"
   lr: 1e-5
-  alpha: 0.0
-  num_workers: 20
+  alpha: 1e-5
+  num_workers: 40
   save_step: 10
   mean_element: 0.5
   std_element: 0.5

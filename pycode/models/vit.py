@@ -251,7 +251,7 @@ class VisionTransformer(nn.Module):
         return {'pos_embed', 'cls_token', 'time_embed'}
 
     def get_classifier(self):
-        return self.head
+        return self.mlp_head_roll, self.mlp_head_pitch
 
     def reset_classifier(self, num_classes, global_pool=''):
         self.num_classes = num_classes
@@ -312,11 +312,11 @@ class VisionTransformer(nn.Module):
         return x[:, 0]
 
     def forward(self, x):
-        #print(x.size())
         x = self.forward_features(x)
-        #x = self.head(x)
+        roll = self.mlp_head_roll(x)
+        pitch = self.mlp_head_pitch(x)
 
-        return self.mlp_head_roll(x), self.mlp_head_pitch(x)
+        return roll, pitch
 
 def _conv_filter(state_dict, patch_size=16):
     """ convert patch embedding weight from manual patchify + linear proj to conv"""
