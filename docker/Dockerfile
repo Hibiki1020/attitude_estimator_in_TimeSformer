@@ -28,13 +28,33 @@ RUN apt-get update && \
 RUN python3 -m pip install -U --force-reinstall pip
 
 RUN pip3 install torch \
-torchvision \
-'git+https://github.com/facebookresearch/fvcore' \
-simplejson \
-einops \
-timm \
-psutil \
-scikit-learn \
-opencv-python \
-tensorboard
+                torchvision \
+                torchvideo \
+                'git+https://github.com/facebookresearch/fvcore' \
+                simplejson \
+                einops \
+                timm \
+                psutil \
+                scikit-learn \
+                opencv-python \
+                tensorboard \
+                torchsummary \
+                tqdm \
+                matplotlib \
+                pyyaml \
+                ttach \
+                grad-cam
 
+RUN kdir /home/pycode && \
+    mkdir /home/log && \
+    mkdir -p /home/log/train_log && \
+    mkdir -p /home/log/inference_test_log && \
+    mkdir -p /home/log/other_test_log && \
+    cd /home/pycode && \
+    git clone https://github.com/Hibiki1020/attitude_estimator_in_TimeSformer.git && \
+    cd attitude_estimator_in_TimeSformer && \
+    python3 setup.py build develop
+
+RUN cd /home
+
+WORKDIR /home
