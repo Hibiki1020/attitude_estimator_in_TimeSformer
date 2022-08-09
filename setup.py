@@ -1,0 +1,21 @@
+from setuptools import find_packages, setup
+
+setup(
+    name="attitude_estimation_in_timesformer",
+    version="1.0",
+    author="FBAI",
+    url="unknown",
+    description="TimeSformer for Attitude Estimation",
+    keywords = [
+    'artificial intelligence',
+    'attention mechanism',
+    'transformers',
+    'video classification',
+    ],
+    install_requires=[
+        'einops>=0.3',
+        'torch>=1.6'
+    ],
+    extras_require={"tensorboard_video_visualization": ["moviepy"]},
+    packages=find_packages(exclude=("configs", "tests")),
+)
