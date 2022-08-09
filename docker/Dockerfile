@@ -51,7 +51,7 @@ RUN mkdir /home/pycode && \
     mkdir -p /home/log/inference_test_log && \
     mkdir -p /home/log/other_test_log && \
     cd /home/pycode && \
-    git clone https://github.com/Hibiki1020/attitude_estimator_in_TimeSformer.git && \
+    git clone https://github.com/Hibiki1020/attitude_estimator_in_timesformer.git && \
     cd attitude_estimator_in_TimeSformer && \
     python3 setup.py build develop
 
