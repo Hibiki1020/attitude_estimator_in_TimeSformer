@@ -45,7 +45,7 @@ RUN pip3 install torch \
                 ttach \
                 grad-cam
 
-RUN kdir /home/pycode && \
+RUN mkdir /home/pycode && \
     mkdir /home/log && \
     mkdir -p /home/log/train_log && \
     mkdir -p /home/log/inference_test_log && \
