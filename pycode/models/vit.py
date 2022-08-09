@@ -46,12 +46,13 @@ class PatchEmbed(nn.Module):
         self.proj = nn.Conv2d(in_chans, embed_dim, kernel_size=patch_size, stride=patch_size)
 
     def forward(self, x):
+        #print(x.size())
         B, C, T, H, W = x.shape
         x = rearrange(x, 'b c t h w -> (b t) c h w')
         x = self.proj(x)
         W = x.size(-1)
         x = x.flatten(2).transpose(1, 2)
-        return x, T, 
+        return x, T, W
 
 
 
@@ -175,9 +176,9 @@ class Block(nn.Module):
 class VisionTransformer(nn.Module):
     """ Vision Transformere
     """
-    def __init__(self, img_size=224, patch_size=16, in_chans=3, num_classes=1000, embed_dim=768, depth=12,
+    def __init__(self, img_size=224, patch_size=16, in_chans=3, num_classes=63, embed_dim=768, depth=12,
                  num_heads=12, mlp_ratio=4., qkv_bias=False, qk_scale=None, drop_rate=0., attn_drop_rate=0.,
-                 drop_path_rate=0.1, hybrid_backbone=None, norm_layer=nn.LayerNorm, num_frames=8, attention_type='divided_space_time', dropout=0.):
+                 drop_path_rate=0.1, hybrid_backbone=None, norm_layer=nn.LayerNorm, num_frames=16, attention_type='divided_space_time', dropout=0.):
         super().__init__()
         self.attention_type = attention_type
         self.depth = depth
@@ -188,6 +189,18 @@ class VisionTransformer(nn.Module):
             img_size=img_size, patch_size=patch_size, in_chans=in_chans, embed_dim=embed_dim)
 
         num_patches = self.patch_embed.num_patches
+
+        self.mlp_head_roll = nn.Sequential(
+            nn.LayerNorm(self.embed_dim),
+            nn.Linear(self.embed_dim, num_classes),
+            nn.Softmax(dim=1)
+        )
+
+        self.mlp_head_pitch = nn.Sequential(
+            nn.LayerNorm(self.embed_dim),
+            nn.Linear(self.embed_dim, num_classes),
+            nn.Softmax(dim=1)
+        )
 
         ## Positional Embeddings
         self.cls_token = nn.Parameter(torch.zeros(1, 1, embed_dim))
@@ -242,9 +255,10 @@ class VisionTransformer(nn.Module):
 
     def reset_classifier(self, num_classes, global_pool=''):
         self.num_classes = num_classes
-        self.head = nn.Linear(self.embed_dim, num_classes) if num_classes > 0 else nn.Identity()
+        #self.head = nn.Linear(self.embed_dim, num_classes) if num_classes > 0 else nn.Identity()
 
     def forward_features(self, x):
+        #print(x.size())
         B = x.shape[0]
         x, T, W = self.patch_embed(x)
         cls_tokens = self.cls_token.expand(x.size(0), -1, -1)
@@ -298,9 +312,11 @@ class VisionTransformer(nn.Module):
         return x[:, 0]
 
     def forward(self, x):
+        #print(x.size())
         x = self.forward_features(x)
-        x = self.head(x)
-        return x
+        #x = self.head(x)
+
+        return self.mlp_head_roll(x), self.mlp_head_pitch(x)
 
 def _conv_filter(state_dict, patch_size=16):
     """ convert patch embedding weight from manual patchify + linear proj to conv"""

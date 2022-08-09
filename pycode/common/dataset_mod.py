@@ -6,15 +6,16 @@ from PIL import Image
 import numpy as np
 import math
 import csv
+from einops import rearrange, reduce, repeat
 
 class AttitudeEstimatorDataset(data.Dataset):
-    def __init__(self, data_list, transform, phase, index_dict_path, dim_fc_out, num_frames, deg_threshold, resize):
+    def __init__(self, data_list, transform, phase, index_dict_path, dim_fc_out, timesteps, deg_threshold, resize):
         self.data_list = data_list
         self.transform = transform
         self.phase = phase
         self.index_dict_path = index_dict_path
         self.dim_fc_out = dim_fc_out #63
-        self.num_frames = num_frames
+        self.num_frames = timesteps
         self.deg_threshold = deg_threshold #30deg
         self.resize = resize
 
@@ -115,14 +116,15 @@ class AttitudeEstimatorDataset(data.Dataset):
             #print(roll_trans, i)
 
         concated_image = torch.cat(image_array[:self.num_frames+1], dim=0).reshape(self.num_frames, 3, self.resize, self.resize)
+        concated_image = rearrange(concated_image, 't c h w -> c t h w')
         label_roll = roll_array[self.num_frames-1]
         label_pitch = pitch_array[self.num_frames-1]
         
-        """
-        print("\n")
-        print(label_roll)
-        print(concated_image.size())
-        print("\n")
-        """
+        
+        #print("\n")
+        #print(concated_image.size())
+        #print("\n")
+        
+        
 
         return concated_image, label_roll, label_pitch
