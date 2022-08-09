@@ -5,23 +5,23 @@ pretrained_weights_file_name: "TimeSformer_divST_8x32_224_K600.pyth"
 
 
 train:
-  - "/home/ssd_dir/flight_airsim_image/train_sequence1/degree_0"
-#   - "/home/ssd_dir/flight_airsim_image/train_sequence1/degree_5"
-#   - "/home/ssd_dir/flight_airsim_image/train_sequence1/degree_10"
-#   - "/home/ssd_dir/flight_airsim_image/train_sequence2/degree_0"
-#   - "/home/ssd_dir/flight_airsim_image/train_sequence2/degree_5"
-#   - "/home/ssd_dir/flight_airsim_image/train_sequence2/degree_10"
-#   - "/home/ssd_dir/flight_airsim_image/train_sequence3/degree_0"
-#   - "/home/ssd_dir/flight_airsim_image/train_sequence3/degree_5"
-#   - "/home/ssd_dir/flight_airsim_image/train_sequence3/degree_10"
-#   - "/home/ssd_dir/flight_airsim_image/train_sequence4/degree_0"
-#   - "/home/ssd_dir/flight_airsim_image/train_sequence4/degree_5"
-#   - "/home/ssd_dir/flight_airsim_image/train_sequence4/degree_10"
-#   - "/home/ssd_dir/flight_airsim_image/sequence9"
-#   - "/home/ssd_dir/flight_airsim_image/sequence10"
+  - "/home/strage/flight_airsim_image/train_sequence1/degree_0"
+#   - "/home/strage/flight_airsim_image/train_sequence1/degree_5"
+#   - "/home/strage/flight_airsim_image/train_sequence1/degree_10"
+#   - "/home/strage/flight_airsim_image/train_sequence2/degree_0"
+#   - "/home/strage/flight_airsim_image/train_sequence2/degree_5"
+#   - "/home/strage/flight_airsim_image/train_sequence2/degree_10"
+#   - "/home/strage/flight_airsim_image/train_sequence3/degree_0"
+#   - "/home/strage/flight_airsim_image/train_sequence3/degree_5"
+#   - "/home/strage/flight_airsim_image/train_sequence3/degree_10"
+#   - "/home/strage/flight_airsim_image/train_sequence4/degree_0"
+#   - "/home/strage/flight_airsim_image/train_sequence4/degree_5"
+#   - "/home/strage/flight_airsim_image/train_sequence4/degree_10"
+#   - "/home/strage/flight_airsim_image/sequence9"
+#   - "/home/strage/flight_airsim_image/sequence10"
 
 valid:
-  - "/home/ssd_dir/flight_airsim_image/sequence7"
+  - "/home/strage/flight_airsim_image/sequence7"
 
 csv_name: "data_list.csv"
 
