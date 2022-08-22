@@ -34,10 +34,10 @@ hyperparameters:
   num_classes: 63
   num_frames: 16
   attention_type: 'divided_space_time'
-  depth: 12
-  num_heads: 3
+  depth: 4
+  num_heads: 2
   deg_threshold: 30
-  batch_size: 128
+  batch_size: 256
   num_epochs: 50
   optimizer_name: "RAdam"
   lr: 1e-5
