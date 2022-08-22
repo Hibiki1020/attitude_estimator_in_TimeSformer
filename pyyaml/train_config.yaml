@@ -3,7 +3,6 @@ save_top_path: "/home/log/train_log"
 pretrained_weights_top_directory: "/home/pycode/attitude_estimator_in_timesformer/pretrained_weights"
 pretrained_weights_file_name: "TimeSformer_divST_8x32_224_K600.pyth"
 
-
 train:
   - "/home/strage/flight_airsim_image/train_sequence1/degree_0"
   - "/home/strage/flight_airsim_image/train_sequence1/degree_5"
@@ -14,14 +13,13 @@ train:
   - "/home/strage/flight_airsim_image/train_sequence3/degree_0"
   - "/home/strage/flight_airsim_image/train_sequence3/degree_5"
   - "/home/strage/flight_airsim_image/train_sequence3/degree_10"
-  - "/home/strage/flight_airsim_image/sequence9"
-  - "/home/strage/flight_airsim_image/sequence10"
-
-valid:
-  - "/home/strage/flight_airsim_image/sequence7"
   - "/home/strage/flight_airsim_image/train_sequence4/degree_0"
   - "/home/strage/flight_airsim_image/train_sequence4/degree_5"
   - "/home/strage/flight_airsim_image/train_sequence4/degree_10"
+  - "/home/strage/flight_airsim_image/sequence9"
+  - "/home/strage/flight_airsim_image/sequence10"
+valid:
+  - "/home/strage/flight_airsim_image/sequence7"
 
 csv_name: "data_list.csv"
 
@@ -34,13 +32,13 @@ hyperparameters:
   resize: 224
   patch_size: 16
   num_classes: 63
-  num_frames: 8
+  num_frames: 16
   attention_type: 'divided_space_time'
   depth: 12
   num_heads: 3
   deg_threshold: 30
-  batch_size: 64
-  num_epochs: 3
+  batch_size: 256
+  num_epochs: 50
   optimizer_name: "RAdam"
   lr: 1e-5
   alpha: 1e-5
