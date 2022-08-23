@@ -38,7 +38,7 @@ hyperparameters:
   resize: 224
   patch_size: 16
   num_classes: 63
-  num_frames: 8
+  num_frames: 16
   attention_type: 'divided_space_time'
   depth: 3 #num transforemer layers
   num_heads: 12
