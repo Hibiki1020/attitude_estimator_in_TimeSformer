@@ -21,6 +21,8 @@ train:
   - "/home/strage/flight_airsim_image/sequence9"
   - "/home/strage/flight_airsim_image/sequence10"
 valid:
+  - "/home/strage/flight_airsim_image/sequence6"
+  - "/home/strage/flight_airsim_image/sequence7"
   - "/home/strage/flight_airsim_image/train_sequence4/degree_0"
   - "/home/strage/flight_airsim_image/train_sequence4/degree_5"
   - "/home/strage/flight_airsim_image/train_sequence4/degree_10"
@@ -41,7 +43,7 @@ hyperparameters:
   depth: 12
   num_heads: 1
   deg_threshold: 30
-  batch_size: 220
+  batch_size: 128
   num_epochs: 50
   optimizer_name: "RAdam"
   lr: 1e-5
