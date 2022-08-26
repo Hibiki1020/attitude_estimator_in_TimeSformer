@@ -9,7 +9,7 @@ import csv
 from einops import rearrange, reduce, repeat
 
 class AttitudeEstimatorDataset(data.Dataset):
-    def __init__(self, data_list, transform, phase, index_dict_path, dim_fc_out, timesteps, deg_threshold, resize):
+    def __init__(self, data_list, transform, phase, index_dict_path, dim_fc_out, timesteps, deg_threshold, resize, do_white_makeup, do_white_makeup_from_back, whiteup_frame):
         self.data_list = data_list
         self.transform = transform
         self.phase = phase
@@ -18,6 +18,9 @@ class AttitudeEstimatorDataset(data.Dataset):
         self.num_frames = timesteps
         self.deg_threshold = deg_threshold #30deg
         self.resize = resize
+        self.do_white_makeup = do_white_makeup
+        self.do_white_makeup_from_back = do_white_makeup_from_back
+        self.whiteup_frame = whiteup_frame
 
         self.index_dict = []
         self.dict_len = 0
@@ -96,6 +99,24 @@ class AttitudeEstimatorDataset(data.Dataset):
             img_pil = Image.open(img_path)
             #img_pil = img_pil.convert("L") # convert to grayscale
             img_pil = img_pil.convert("RGB")
+
+            if self.do_white_makeup == True and i < self.whiteup_frame-1 and self.do_white_makeup_from_back == False:
+                #Convert to white makeup for verification
+                img_pil = Image.new('RGB', (self.resize, self.resize), 'white')
+                
+                # show test
+                # arrPIL = np.asarray(img_pil)
+                # plt.imshow(arrPIL)
+                # plt.show()
+
+            if self.do_white_makeup_from_back == True and self.do_white_makeup == False and i > self.whiteup_frame:
+                #Convert to white makeup for verification
+                img_pil = Image.new('RGB', (self.resize, self.resize), 'white')
+                
+                # show test
+                # arrPIL = np.asarray(img_pil)
+                # plt.imshow(arrPIL)
+                # plt.show()
 
             tmp_roll = float(self.data_list[index + i][6])
             tmp_pitch = float(self.data_list[index + i][7])

@@ -29,4 +29,5 @@ hyperparameters:
   mean_element: 0.5
   std_element: 0.5
   do_white_makeup: False
+  do_white_makeup_from_back: False
   whiteup_frame: 0

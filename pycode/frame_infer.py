@@ -74,6 +74,7 @@ class FrameInfer:
         self.mean_element = float(self.cfg['hyperparameters']['mean_element'])
         self.std_element = float(self.cfg['hyperparameters']['std_element'])
         self.do_white_makeup = bool(self.cfg['hyperparameters']['do_white_makeup'])
+        self.do_white_makeup_from_back = bool(self.cfg['hyperparameters']['do_white_makeup_from_back'])
         self.whiteup_frame = int(self.cfg['hyperparameters']['whiteup_frame'])
 
         self.transform = data_transform_mod.DataTransform(
@@ -111,6 +112,7 @@ class FrameInfer:
             deg_threshold = self.deg_threshold,
             resize = self.resize,
             do_white_makeup = self.do_white_makeup,
+            do_white_makeup_from_back = self.do_white_makeup_from_back,
             whiteup_frame = self.whiteup_frame
         )
 
