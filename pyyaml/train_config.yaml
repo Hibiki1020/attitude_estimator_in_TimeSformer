@@ -38,13 +38,13 @@ hyperparameters:
   resize: 224
   patch_size: 16
   num_classes: 63
-  num_frames: 16
+  num_frames: 8
   attention_type: 'divided_space_time'
   depth: 3 #num transforemer layers
   num_heads: 12
   deg_threshold: 30
   batch_size: 220
-  num_epochs: 50
+  num_epochs: 80
   optimizer_name: "RAdam"
   lr: 1e-5
   alpha: 1e-5

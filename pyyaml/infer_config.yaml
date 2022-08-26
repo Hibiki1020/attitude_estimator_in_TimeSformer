@@ -19,7 +19,7 @@ index_csv_path: "/home/pycode/attitude_estimator_in_timesformer/index_dict/index
 hyperparameters:
   img_size: 224
   resize: 224
-  patch_size: 16
+  patch_size: 8
   num_classes: 63
   num_frames: 8
   attention_type: 'divided_space_time'
