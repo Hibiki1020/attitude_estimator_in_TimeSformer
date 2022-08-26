@@ -105,9 +105,9 @@ class AttitudeEstimatorDataset(data.Dataset):
                 img_pil = Image.new('RGB', (self.resize, self.resize), 'white')
                 
                 # show test
-                # arrPIL = np.asarray(img_pil)
-                # plt.imshow(arrPIL)
-                # plt.show()
+                arrPIL = np.asarray(img_pil)
+                plt.imshow(arrPIL)
+                plt.show()
 
             if self.do_white_makeup_from_back == True and self.do_white_makeup == False and i > self.whiteup_frame:
                 #Convert to white makeup for verification

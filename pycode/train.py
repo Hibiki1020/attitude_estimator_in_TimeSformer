@@ -358,7 +358,7 @@ if __name__ == "__main__":
     )
 
     print("Load Network")
-    net = vit.TimeSformer(img_size, patch_size, num_classes, num_frames, depth, num_heads, attention_type, pretrained_weights_path, use_pretrained=True)
+    net = vit.TimeSformer(img_size, patch_size, num_classes, num_frames, depth, num_heads, attention_type, pretrained_weights_path, 'train')
     print(net)
 
     trainer = Trainer(

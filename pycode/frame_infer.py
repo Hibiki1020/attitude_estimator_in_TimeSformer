@@ -118,7 +118,7 @@ class FrameInfer:
 
     def getNetwork(self):
         #net = network.ViViT(self.resize, self.patch_size, self.dim_fc_out, self.timesteps)
-        net = vit.TimeSformer(self.img_size, self.patch_size, self.num_classes, self.num_frames, self.depth, self.num_heads, self.attention_type, use_pretrained=False)
+        net = vit.TimeSformer(self.img_size, self.patch_size, self.num_classes, self.num_frames, self.depth, self.num_heads, self.attention_type, self.weights_path, 'infer')
         print("Load Network")
         print(net)
 
