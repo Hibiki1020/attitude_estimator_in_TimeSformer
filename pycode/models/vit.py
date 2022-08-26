@@ -330,7 +330,7 @@ def _conv_filter(state_dict, patch_size=16):
     return out_dict
 
 class TimeSformer(nn.Module):
-    def __init__(self, img_size=224, patch_size=16, num_classes=63, num_frames=8, depth=12, num_heads=12, attention_type='divided_space_time',  pretrained_model='', **kwargs):
+    def __init__(self, img_size=224, patch_size=16, num_classes=63, num_frames=8, depth=12, num_heads=12, attention_type='divided_space_time',  pretrained_model='', use_pretrained=True, **kwargs):
         super(TimeSformer, self).__init__()
         self.pretrained=False
         self.model = VisionTransformer(img_size=img_size, num_classes=num_classes, patch_size=patch_size, embed_dim=768, depth=depth, num_heads=num_heads, mlp_ratio=4, qkv_bias=True, norm_layer=partial(nn.LayerNorm, eps=1e-6), drop_rate=0., attn_drop_rate=0., drop_path_rate=0.1, num_frames=num_frames, attention_type=attention_type, **kwargs)
@@ -338,7 +338,7 @@ class TimeSformer(nn.Module):
         self.attention_type = attention_type
         self.model.default_cfg = default_cfgs['vit_base_patch'+str(patch_size)+'_224']
         self.num_patches = (img_size // patch_size) * (img_size // patch_size)
-        if self.pretrained:
+        if use_pretrained==True:
             load_pretrained(self.model, num_classes=self.model.num_classes, in_chans=kwargs.get('in_chans', 3), filter_fn=_conv_filter, img_size=img_size, num_frames=num_frames, num_patches=self.num_patches, attention_type=self.attention_type, pretrained_model=pretrained_model)
     def forward(self, x):
         x = self.model(x)
