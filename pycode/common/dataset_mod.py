@@ -6,6 +6,7 @@ from PIL import Image
 import numpy as np
 import math
 import csv
+import matplotlib.pyplot as plt
 from einops import rearrange, reduce, repeat
 
 class AttitudeEstimatorDataset(data.Dataset):
@@ -100,14 +101,14 @@ class AttitudeEstimatorDataset(data.Dataset):
             #img_pil = img_pil.convert("L") # convert to grayscale
             img_pil = img_pil.convert("RGB")
 
-            if self.do_white_makeup == True and i < self.whiteup_frame-1 and self.do_white_makeup_from_back == False:
+            if self.do_white_makeup == True and i <= self.whiteup_frame-1 and self.do_white_makeup_from_back == False:
                 #Convert to white makeup for verification
                 img_pil = Image.new('RGB', (self.resize, self.resize), 'white')
                 
                 # show test
-                arrPIL = np.asarray(img_pil)
-                plt.imshow(arrPIL)
-                plt.show()
+                # arrPIL = np.asarray(img_pil)
+                # plt.imshow(arrPIL)
+                # plt.show()
 
             if self.do_white_makeup_from_back == True and self.do_white_makeup == False and i > self.whiteup_frame:
                 #Convert to white makeup for verification
