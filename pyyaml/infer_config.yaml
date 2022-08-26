@@ -8,9 +8,9 @@ weights_top_directory: "/home/ssd_dir/attitude_estimator_in_timesformer_log/trai
 weights_file_name: "weights.pth"
 
 infer_log_top_directory: "/home/ssd_dir/attitude_estimator_in_timesformer_log/train_log_2022_0826/"
-infer_log_file_name: "frame_infer_relust_wo_front_1frame.csv"
+infer_log_file_name: "frame_infer_relust_wo_back_4frame.csv"
 
-yaml_name: "infer_config_wo_front_1frame.yaml"
+yaml_name: "infer_config_wo_back_4frame.yaml"
 
 index_dict_name: "index_dict_-30_30_range_step1deg.csv"
 
@@ -28,6 +28,6 @@ hyperparameters:
   deg_threshold: 30
   mean_element: 0.5
   std_element: 0.5
-  do_white_makeup: True
+  do_white_makeup: False
   do_white_makeup_from_back: False
-  whiteup_frame: 1
+  whiteup_frame: 0
