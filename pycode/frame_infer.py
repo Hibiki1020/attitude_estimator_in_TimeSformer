@@ -58,7 +58,7 @@ class FrameInfer:
         shutil.copy(FLAGS.config, yaml_path)
 
         self.index_dict_name = self.cfg['index_dict_name']
-        self.index_dict_path = "../../index_dict/" + self.index_dict_name
+        self.index_dict_path = "../index_dict/" + self.index_dict_name
 
         self.index_csv_path = self.cfg['index_csv_path']
 
@@ -97,7 +97,7 @@ class FrameInfer:
 
         #self.data_list = self.getDatalist()
 
-        self.test_dataset = dataset_mod.ViViTAttitudeEstimatorDataset(
+        self.test_dataset = dataset_mod.AttitudeEstimatorDataset(
             data_list=make_datalist_mod.makeMultiDataList(self.infer_sequence, self.csv_name),
             #data_list = self.data_list,
             transform = data_transform_mod.DataTransform(

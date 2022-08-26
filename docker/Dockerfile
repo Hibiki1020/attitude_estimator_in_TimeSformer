@@ -10,20 +10,23 @@ ENV DEBIAN_FRONTEND=noninteractive
 
 
 
-RUN apt-get update && apt-get install -y \
-	vim \
+RUN apt-get update && apt-get upgrade -y
+
+RUN apt-get install -y vim \
 	wget \
 	unzip \
 	git \
-	build-essential \
-	libsm6 \
-	libxrender1 \
-	libxext-dev
+	build-essential
+
 
 RUN apt-get update && \
-	apt-get install -y \
-	python3-pip \
-	python3-tk
+	apt-get install -y python3-pip \
+	python3-tk \
+    libsm6 \
+	libxrender1 \
+	libxext-dev \
+    libgl1-mesa-dev \
+    libopencv-dev 
 
 RUN python3 -m pip install -U --force-reinstall pip
 
