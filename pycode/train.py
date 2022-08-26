@@ -313,9 +313,9 @@ if __name__ == "__main__":
     save_step = int(CFG["hyperparameters"]["save_step"])
     mean_element = float(CFG["hyperparameters"]["mean_element"])
     std_element = float(CFG["hyperparameters"]["std_element"])
-    do_white_makeup = bool(CFG["hyperparameter"]["do_white_makeup"])
-    do_white_makeup_from_back = bool(CFG["hyperparameter"]["do_white_makeup_from_back"])
-    whiteup_frame = int(CFG["hyperparameter"]["whiteup_frame"])
+    do_white_makeup = bool(CFG["hyperparameters"]["do_white_makeup"])
+    do_white_makeup_from_back = bool(CFG["hyperparameters"]["do_white_makeup_from_back"])
+    whiteup_frame = int(CFG["hyperparameters"]["whiteup_frame"])
 
     print("Load Train Dataset")
 
