@@ -120,7 +120,7 @@ class AttitudeEstimatorDataset(data.Dataset):
                 # plt.imshow(arrPIL)
                 # plt.show()
 
-            tmp_roll = float(self.data_list[index + i][6])
+            tmp_roll = float(self.data_list[index + i][6]) * -1.0 #For Gimbal and ROS Angle
             tmp_pitch = float(self.data_list[index + i][7])
 
             roll_list = self.float_to_array(tmp_roll)
