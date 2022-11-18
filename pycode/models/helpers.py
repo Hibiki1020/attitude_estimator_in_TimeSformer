@@ -198,6 +198,7 @@ def load_pretrained(model, cfg=None, num_classes=1000, in_chans=3, filter_fn=Non
 
     ## Loading the weights
     model.load_state_dict(state_dict, strict=False)
+    return model
 
 
 def extract_layer(model, layer):

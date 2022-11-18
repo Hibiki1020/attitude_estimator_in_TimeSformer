@@ -190,18 +190,6 @@ class VisionTransformer(nn.Module):
 
         num_patches = self.patch_embed.num_patches
 
-        self.mlp_head_roll = nn.Sequential(
-            nn.LayerNorm(self.embed_dim),
-            nn.Linear(self.embed_dim, num_classes),
-            nn.Softmax(dim=1)
-        )
-
-        self.mlp_head_pitch = nn.Sequential(
-            nn.LayerNorm(self.embed_dim),
-            nn.Linear(self.embed_dim, num_classes),
-            nn.Softmax(dim=1)
-        )
-
         ## Positional Embeddings
         self.cls_token = nn.Parameter(torch.zeros(1, 1, embed_dim))
         self.pos_embed = nn.Parameter(torch.zeros(1, num_patches+1, embed_dim))
@@ -220,7 +208,7 @@ class VisionTransformer(nn.Module):
         self.norm = norm_layer(embed_dim)
 
         # Classifier head
-        self.head = nn.Linear(embed_dim, num_classes) if num_classes > 0 else nn.Identity()
+        #self.head = nn.Linear(embed_dim, num_classes) if num_classes > 0 else nn.Identity()
 
         trunc_normal_(self.pos_embed, std=.02)
         trunc_normal_(self.cls_token, std=.02)
@@ -236,6 +224,18 @@ class VisionTransformer(nn.Module):
                       nn.init.constant_(m.temporal_fc.weight, 0)
                       nn.init.constant_(m.temporal_fc.bias, 0)
                     i += 1
+
+        self.mlp_head_roll = nn.Sequential(
+            nn.LayerNorm(self.embed_dim),
+            nn.Linear(self.embed_dim, num_classes),
+            nn.Softmax(dim=1)
+        )
+
+        self.mlp_head_pitch = nn.Sequential(
+            nn.LayerNorm(self.embed_dim),
+            nn.Linear(self.embed_dim, num_classes),
+            nn.Softmax(dim=1)
+        )
 
     def _init_weights(self, m):
         if isinstance(m, nn.Linear):
@@ -339,7 +339,7 @@ class TimeSformer(nn.Module):
         self.model.default_cfg = default_cfgs['vit_base_patch'+str(patch_size)+'_224']
         self.num_patches = (img_size // patch_size) * (img_size // patch_size)
         if self.pretrained and phase=='train':
-            load_pretrained(self.model, num_classes=self.model.num_classes, in_chans=kwargs.get('in_chans', 3), filter_fn=_conv_filter, img_size=img_size, num_frames=num_frames, num_patches=self.num_patches, attention_type=self.attention_type, pretrained_model=pretrained_model)
+            self.model = load_pretrained(self.model, num_classes=self.model.num_classes, in_chans=kwargs.get('in_chans', 3), filter_fn=_conv_filter, img_size=img_size, num_frames=num_frames, num_patches=self.num_patches, attention_type=self.attention_type, pretrained_model=pretrained_model)
     def forward(self, x):
         x = self.model(x)
         return x
