@@ -88,11 +88,16 @@ class FrameInfer:
 
         self.value_dict = []
 
+        self.value_dict.append([-1*int(self.deg_threshold)-1, 0])
+
         with open(self.index_dict_path) as fd:
             reader = csv.reader(fd)
             for row in reader:
-                num = float(row[0])
-                self.value_dict.append(num)
+                #num = float(row[0])
+                tmp_row = [int(row[0]), int(row[1])+1]
+                self.value_dict.append(tmp_row)
+
+        self.value_dict.append([int(self.deg_threshold)+1, int(self.num_classes)-1])
 
 
         #self.data_list = self.getDatalist()
@@ -241,7 +246,7 @@ class FrameInfer:
         value = 0.0
         
         for tmp, label in zip(output_array[0], self.value_dict):
-            value += tmp * label
+            value += tmp * float(label[0])
 
         if max_index == 0:
             value = -31.0
@@ -260,7 +265,7 @@ class FrameInfer:
             #print("val :", tmp)
             #print("label :", label)
             #print(tmp*label)
-            value += tmp * label
+            value += tmp * float(label[0])
 
         if max_index == 0:
             value = -31.0
